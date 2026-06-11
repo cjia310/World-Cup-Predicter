@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>World Cup 26 Predictor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <nav><span class="brand">WC26 / LAB</span><span>DATA AS OF: 2026-06-11</span></nav>
+    <div class="hero-copy">
+      <p class="eyebrow">48 TEAMS · 104 MATCHES · ONE CHAMPION</p>
+      <h1>WORLD CUP<br><em>PROBABILITY LAB</em></h1>
+      <p class="intro">Explore match and championship probabilities using strength seeds, World Cup history, experience, and host advantage.</p>
+    </div>
+    <div class="hero-stat"><strong id="favoriteName">—</strong><span>MODEL FAVORITE</span><b id="favoriteChance">—</b></div>
+  </header>
+
+  <main>
+    <section class="panel controls">
+      <div>
+        <p class="eyebrow">MODEL CONTROLS</p>
+        <h2>You decide how much history matters</h2>
+      </div>
+      <label>Current strength <strong id="strengthValue">65%</strong><input id="strengthWeight" type="range" min="30" max="90" value="65"></label>
+      <label>World Cup history <strong id="historyValue">25%</strong><input id="historyWeight" type="range" min="5" max="50" value="25"></label>
+      <label>Experience / host <strong id="contextValue">10%</strong><input id="contextWeight" type="range" min="5" max="30" value="10"></label>
+      <button id="simulateBtn">Simulate 5,000 tournaments</button>
+    </section>
+
+    <section class="matchup section">
+      <div class="section-head"><div><p class="eyebrow">MATCHUP</p><h2>Match predictor</h2></div><p>90-minute result, excluding extra time and penalties.</p></div>
+      <div class="match-card">
+        <div class="team-pick"><select id="teamA"></select><div class="crest" id="crestA"></div><strong id="scoreA">—</strong><span>WIN</span></div>
+        <div class="draw-pick"><strong id="scoreDraw">—</strong><span>DRAW</span><div class="versus">VS</div></div>
+        <div class="team-pick"><select id="teamB"></select><div class="crest" id="crestB"></div><strong id="scoreB">—</strong><span>WIN</span></div>
+      </div>
+      <p class="explain" id="matchExplain"></p>
+      <div class="score-prediction">
+        <div><p class="eyebrow">MOST LIKELY SCORE</p><strong id="likelyScore">—</strong><span id="expectedGoals"></span></div>
+        <div id="scorelines" class="scorelines"></div>
+      </div>
+    </section>
+
+    <section class="section live-section">
+      <div class="section-head"><div><p class="eyebrow live-label"><i></i> LIVE DATA</p><h2>Matches & live predictions</h2></div><p id="liveUpdated">Connecting to live match data…</p></div>
+      <div id="liveMatches" class="live-matches"><div class="live-empty">Loading today's fixtures…</div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div><p class="eyebrow">TOURNAMENT SIMULATION</p><h2>Championship probabilities</h2></div><p>Group stage follows the official draw; knockout paths use an approximate strength-based pairing.</p></div>
+      <div id="ranking" class="ranking"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div><p class="eyebrow">THE FIELD</p><h2>12 groups</h2></div><p>Select a team to inspect the data used by the model.</p></div>
+      <div id="groups" class="groups"></div>
+    </section>
+
+    <section class="method">
+      <div><p class="eyebrow">METHODOLOGY</p><h2>Transparent, not prophetic</h2></div>
+      <p>Current strength is measured using model seed ranking. History combines World Cup titles and best-ever finishes. Experience uses tournament appearances, with a limited advantage applied to the three hosts. Match outcomes use Elo-style probabilities and a draw baseline, then repeat through Monte Carlo simulation.</p>
+      <p><strong>Limitations:</strong> Injuries, final lineups, live form, player-level data, and betting markets are not included. Results are exploratory model outputs, not betting advice.</p>
+      <div class="sources">
+        <a href="https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/final-draw-results" target="_blank">FIFA · Final Draw</a>
+        <a href="https://gpcustomersupportfwc2026.tickets.fifa.com/hc/en-gb/articles/28784798873117-10-What-is-the-format-for-the-FIFA-World-Cup-2026-tournament" target="_blank">FIFA · Tournament Format</a>
+        <a href="https://inside.fifa.com/fifa-world-ranking/men" target="_blank">FIFA · Men's Ranking</a>
+        <a href="https://www.espn.com/soccer/scoreboard" target="_blank">ESPN · Live Scores</a>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="teamDialog"><button id="closeDialog">×</button><div id="dialogContent"></div></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
