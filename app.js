@@ -14,7 +14,7 @@ const raw = [
 ].map(([name,code,group,rank,titles,apps,best,host])=>({name,code,group,rank,titles,apps,best,host}));
 
 const groups = Object.groupBy ? Object.groupBy(raw,t=>t.group) : raw.reduce((a,t)=>((a[t.group]??=[]).push(t),a),{});
-const weights = {strength:65,history:25,context:10};
+const weights = {strength:90,history:5,context:5};
 const $ = s => document.querySelector(s);
 const score = t => {
   const strength = 100 - Math.min(t.rank,100);
